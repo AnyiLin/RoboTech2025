@@ -1,5 +1,6 @@
 #include <Servo.h>
 
+// For CR servos, 0 is clockwise and 180 is counterclockwise, 90 is middle
 Servo drive1;
 Servo drive2;
 Servo suspension1;
@@ -7,15 +8,15 @@ Servo suspension2;
 Servo armRotate;
 Servo armExtension;
 
-const int drive1Pin = 0;
-const int drive2Pin = 0;
-const int suspension1Pin = 0;
-const int suspension2Pin = 0;
-const int armRotatePin = 0;
-const int armExtensionPin = 0;
-const int greenLedPin = 0;
-const int redLedPin = 0;
-int state = 0;
+const int drive1Pin = 9;
+const int drive2Pin = 9;
+const int suspension1Pin = 9;
+const int suspension2Pin = 9;
+const int armRotatePin = 9;
+const int armExtensionPin = 9;
+const int greenLedPin = 8;
+const int redLedPin = 12;
+int state = 1;
 
 void setup() {
   // put your setup code here, to run once:
@@ -138,22 +139,50 @@ void loop() {
     }
   }
 
+  // servo commands
   switch (state) {
     case 1:
+      drive1.write(180);
+      drive2.write(0);
     break;
     case 2:
+      drive1.write(0);
+      drive2.write(180);
     break;
     case 3:
+      suspension1.write(0);
+      suspension2.write(0);
     break;
     case 4:
+      suspension1.write(180);
+      suspension2.write(180);
     break;
     case 5:
+      armRotate.write(180);
+      armExtension.write(0);
     break;
     case 6:
+      armRotate.write(90);
+      armExtension.write(0);
     break;
     case 7:
+      armRotate.write(0);
+      armExtension.write(0);
     break;
     default:
     break;
+  }
+
+  // light control
+  unsigned long seconds = millis() / 1000; 
+  if (seconds % 2 == 0 && state != 6) {
+    digitalWrite(greenLedPin, HIGH);
+  } else {
+    digitalWrite(greenLedPin, LOW);
+  }
+  if (state == 6) {
+    digitalWrite(redLedPin, HIGH);
+  } else {
+    digitalWrite(redLedPin, LOW);
   }
 }
