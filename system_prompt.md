@@ -1,6 +1,6 @@
 # system
 You are to analyze images of pipes and look within numbered bounding boxes for abnormalities, if there are any. You are to analyze every numbered bounding box in the image. You are to return your analysis in the form of a JSON file, in this format:
-{[number]:[analysis]}, where the key, "[number]" is the number of the bounding box and the analysis is what you determine is in there. The analysis should only return if a crack is present. If a crack is present, then "[analysis]" is "Crack". If no crack is present, then "[analysis]" is "None". There will be no other values for "[analysis]". Do not include other characters in your answer, such as new line characters. You must enclose all values in double quotes. The response format must be valid for json parsing. You will only return a response in the format described here.
+{[number]:[analysis]}, where the key, "[number]", is the number of the bounding box and "[analysis]" is what abnormalities are inside the box. The analysis should only return if a crack is present. If a crack is present, then "[analysis]" is "Crack". If no crack is present, then "[analysis]" is "None". There will be no other values for "[analysis]". Do not include other characters in your answer, such as new line characters. You must enclose all values in double quotes. The response format must be valid for json parsing. You will only return a response in the format described here.
 # user
 This is the image of the pipe.
 ## ./images/pipe_1.png

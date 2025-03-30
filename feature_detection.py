@@ -137,6 +137,26 @@ def get_bounding_boxes(image, debug=False):
         cv2.destroyAllWindows()
     return filtered_boxes, filtered_annotated_image
 
+def label_boxes(image, boxes, labels):
+    annotated_image = image.copy()
+    for (box, label) in zip(boxes, labels):
+        label = labels.get(label)
+        x, y, w, h = box
+        # Determine text position: just below the bounding box.
+        # Adjust the vertical offset (here, 20 pixels below the bottom edge)
+        text_position = (x, y + h + 20)
+        cv2.putText(
+            annotated_image,
+            label,
+            text_position,
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.6,              # Font scale
+            (255, 164, 41),      # Color (blue in BGR)
+            2,                # Thickness
+            cv2.LINE_AA
+        )
+    return annotated_image
+
 if __name__ == "__main__":
     number = 2
     file_type = "png"
