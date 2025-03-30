@@ -15,7 +15,7 @@ openai.api_key = api_key
 
 system_prompt = parse_system_prompt.parse_markdown_to_messages("system_prompt.md")
 
-image = cv2.imread("./other/pipe_image_1.png", cv2.IMREAD_UNCHANGED)
+image = cv2.imread("./images/pipe_1.png", cv2.IMREAD_UNCHANGED)
 boxes, annotated_image = feature_detection.get_bounding_boxes(image)
 cv2.imwrite("image.jpg", image)
 cv2.imwrite("image_annotated.jpg", annotated_image)

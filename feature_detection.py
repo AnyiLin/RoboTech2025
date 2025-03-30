@@ -158,7 +158,7 @@ def label_boxes(image, boxes, labels):
     return annotated_image
 
 if __name__ == "__main__":
-    number = 2
+    number = 1
     file_type = "png"
     image_path = f"./images/pipe_{number}.{file_type}"
     image = cv2.imread(image_path)

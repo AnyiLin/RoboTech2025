@@ -3,7 +3,9 @@
 Servo myServo;            // Create a servo object
 
 const int servoPin = 9;   // Connect the servo signal wire to digital pin 9
-// led is on digital pin 12
+int hasRed = 0;
+// red led is on digital pin 12
+// green led is on digital pin 8
 
 void setup() {
   // Initialize the serial communication at 9600 baud.
@@ -14,10 +16,17 @@ void setup() {
   // Set the LED pin as an output.
   pinMode(LED_BUILTIN, OUTPUT);
   pinMode(12, OUTPUT);
+  pinMode(8, OUTPUT);
   digitalWrite(LED_BUILTIN, HIGH);
 }
 
 void loop() {
+  unsigned long seconds = millis() / 1000; 
+  if (seconds % 2 == 0 && hasRed == 0) {
+    digitalWrite(8, HIGH);
+  } else {
+    digitalWrite(8, LOW);
+  }
   // Check if a serial command is available.
   if (Serial.available() > 0) {
     // Read the incoming byte.
@@ -25,12 +34,14 @@ void loop() {
 
     // Process the command.
     if (command == '1') {
+      hasRed = 1;
       digitalWrite(12, HIGH);
       myServo.write(180);
       // Set LED to full brightness (255 out of 255).
       Serial.println("Setting servo to 180");
     } 
     else if (command == '0') {
+      hasRed = 0;
       digitalWrite(12, LOW);
       myServo.write(0);
       // Set LED to a dim value (e.g., 50 out of 255).
