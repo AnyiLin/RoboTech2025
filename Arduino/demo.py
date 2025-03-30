@@ -24,14 +24,15 @@ except Exception as e:
 	print("Error opening serial port:", e)
 	exit()
 	
+time.sleep(2)
 ser.write("1".encode('utf-8'))
-time.sleep(0.5)
+time.sleep(2)
 ser.write("2".encode('utf-8'))
-time.sleep(0.5)
+time.sleep(2)
 ser.write("3".encode('utf-8'))
-time.sleep(0.5)
+time.sleep(2)
 ser.write("4".encode('utf-8'))
-time.sleep(0.5)
+time.sleep(2)
 
 cap = cv2.VideoCapture(-1)
 if not cap.isOpened():
@@ -76,9 +77,9 @@ while True:
 			center_x = x + w // 2
 			center_y = y + h // 2
 			
-			if center_x < 320 - 20:
+			if center_x < 320 - 40:
 				ser.write("7".encode('utf-8'))
-			elif center_x > 320 + 20:
+			elif center_x > 320 + 40:
 				ser.write("5".encode('utf-8'))
 			else:
 				ser.write("6".encode('utf-8'))

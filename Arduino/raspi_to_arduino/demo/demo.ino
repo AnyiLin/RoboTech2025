@@ -9,11 +9,24 @@ Servo armRotate;
 Servo armExtension;
 
 const int drive1Pin = 9;
-const int drive2Pin = 9;
-const int suspension1Pin = 9;
-const int suspension2Pin = 9;
-const int armRotatePin = 9;
-const int armExtensionPin = 9;
+const int drive1Forward = 0;
+const int drive1Backward = 180;
+const int drive2Pin = 3;
+const int drive2Forward = 0;
+const int drive2Backward = 180;
+const int suspension1Pin = 11;
+const int suspension1Extend = 90;
+const int suspension1Retract = 180;
+const int suspension2Pin = 10;
+const int suspension2Extend = 80;
+const int suspension2Retract = 170;
+const int armRotatePin = 6;
+const int armRotateLeft = 82;
+const int armRotateNone = 90;
+const int armRotateRight = 104;
+const int armExtensionPin = 5;
+const int armRetracted = 180;
+const int armExtended = 0;
 const int greenLedPin = 8;
 const int redLedPin = 12;
 int state = 1;
@@ -142,32 +155,32 @@ void loop() {
   // servo commands
   switch (state) {
     case 1:
-      drive1.write(180);
-      drive2.write(0);
+      drive1.write(drive1Forward);
+      drive2.write(drive2Forward);
     break;
     case 2:
-      drive1.write(0);
-      drive2.write(180);
+      drive1.write(drive1Backward);
+      drive2.write(drive2Backward);
     break;
     case 3:
-      suspension1.write(0);
-      suspension2.write(0);
+      suspension1.write(suspension1Retract);
+      suspension2.write(suspension2Retract);
     break;
     case 4:
-      suspension1.write(180);
-      suspension2.write(180);
+      suspension1.write(suspension1Extend);
+      suspension2.write(suspension2Extend);
     break;
     case 5:
-      armRotate.write(180);
-      armExtension.write(0);
+      armRotate.write(armRotateLeft);
+      armExtension.write(armRetracted);
     break;
     case 6:
-      armRotate.write(90);
-      armExtension.write(0);
+      armRotate.write(armRotateNone);
+      armExtension.write(armExtended);
     break;
     case 7:
-      armRotate.write(0);
-      armExtension.write(0);
+      armRotate.write(armRotateRight);
+      armExtension.write(armRetracted);
     break;
     default:
     break;
